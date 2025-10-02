@@ -1,0 +1,31 @@
+{
+    "name": "store-rating-platform",
+    "version": "1.0.0",
+    "description": "Store Rating Platform MERN Stack Application",
+    "main": "backend/server.js",
+    "scripts": {
+      "build": "cd client && npm install && npm run build",
+      "start": "cd backend && node server.js",
+      "dev": "concurrently \"cd backend && npm run dev\" \"cd client && npm start\"",
+      "install-client": "cd client && npm install",
+      "install-backend": "cd backend && npm install",
+      "install-all": "npm run install-backend && npm run install-client"
+    },
+    "engines": {
+      "node": "18.x"
+    },
+    "keywords": [
+      "mern",
+      "react",
+      "nodejs",
+      "express",
+      "mongodb",
+      "store-rating"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "dependencies": {
+      "concurrently": "^8.2.0"
+    }
+  }
+  
