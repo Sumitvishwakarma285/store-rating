@@ -15,9 +15,9 @@ const Login = () => {
         try {
             const user = await login(data.email, data.password);
             toast.success('Login successful!');
-            
+
             // Redirect based on role
-            switch (user.role) {
+            switch (user?.role) {
                 case 'admin':
                     navigate('/admin');
                     break;
@@ -28,9 +28,12 @@ const Login = () => {
                     navigate('/dashboard');
             }
         } catch (error) {
-            toast.error(error.response?.data?.message || 'Login failed');
+            toast.error(
+                error.response?.data?.message || error.message || 'Login failed'
+            );
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -47,6 +50,7 @@ const Login = () => {
                 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <div className="space-y-4">
+                        {/* Email Field */}
                         <div>
                             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                 Email address
@@ -62,7 +66,7 @@ const Login = () => {
                                 id="email"
                                 type="email"
                                 autoComplete="email"
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 placeholder="Enter your email"
                             />
                             {errors.email && (
@@ -70,6 +74,7 @@ const Login = () => {
                             )}
                         </div>
 
+                        {/* Password Field */}
                         <div>
                             <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                 Password
@@ -81,7 +86,7 @@ const Login = () => {
                                 id="password"
                                 type="password"
                                 autoComplete="current-password"
-                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-primary-500 focus:border-primary-500"
+                                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                                 placeholder="Enter your password"
                             />
                             {errors.password && (
@@ -90,11 +95,12 @@ const Login = () => {
                         </div>
                     </div>
 
+                    {/* Submit Button */}
                     <div>
                         <button
                             type="submit"
                             disabled={loading}
-                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <div className="flex items-center">
@@ -110,9 +116,9 @@ const Login = () => {
                     <div className="text-center">
                         <Link 
                             to="/register" 
-                            className="text-primary-600 hover:text-primary-500 text-sm"
+                            className="text-indigo-600 hover:text-indigo-500 text-sm"
                         >
-                            Don't have an account? Sign up
+                            Don&apos;t have an account? Sign up
                         </Link>
                     </div>
                 </form>

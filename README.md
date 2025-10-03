@@ -40,7 +40,7 @@ The platform implements **role-based authentication** with three distinct user t
 - Store Owners  
 - Administrators  
 
-**Live Demo**: [Store Rating Platform](#)  
+**Live Demo**: [Store Rating Platform](https://store-rating-4.onrender.com/)  
 **API Docs**: [Backend API](#)  
 
 ---
