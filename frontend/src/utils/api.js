@@ -1,7 +1,12 @@
 import axios from 'axios';
 
+// API base URL - points to your backend service
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://store-rating-api.onrender.com';
+
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+    baseURL: API_BASE_URL,
+    timeout: 30000, // 30 seconds timeout for Render cold starts
+    withCredentials: false // Set to true if using cookies
 });
 
 // Request interceptor to add auth token
@@ -23,6 +28,7 @@ api.interceptors.response.use(
     (response) => response,
     (error) => {
         if (error.response?.status === 401) {
+            // Clear token and redirect to login
             localStorage.removeItem('token');
             window.location.href = '/login';
         }
