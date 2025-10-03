@@ -12,7 +12,7 @@ export const useAuth = () => {
 };
 
 // Set up axios defaults - Fixed for Vite
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'https://store-rating-api.onrender.com';
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
