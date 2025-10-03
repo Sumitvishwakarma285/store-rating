@@ -14,8 +14,6 @@ const pool = mysql.createPool({
     ssl: process.env.NODE_ENV === 'production' ? {
         rejectUnauthorized: false
     } : false,
-    // Remove sql_mode from connection options
-    // sql_mode: 'TRADITIONAL,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'
 });
 
 // Set SQL mode after connection instead
