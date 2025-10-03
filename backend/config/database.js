@@ -14,16 +14,16 @@ const pool = mysql.createPool({
     ssl: process.env.NODE_ENV === 'production' ? {
         rejectUnauthorized: false
     } : false,
-    // Disable ONLY_FULL_GROUP_BY mode
-    sql_mode: 'TRADITIONAL,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'
+    // Remove sql_mode from connection options
+    // sql_mode: 'TRADITIONAL,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'
 });
 
-// Test connection and set SQL mode
+// Set SQL mode after connection instead
 const testConnection = async () => {
     try {
         const connection = await pool.getConnection();
         
-        // Disable ONLY_FULL_GROUP_BY for this session
+        // Set SQL mode in the session instead of connection options
         await connection.execute("SET sql_mode = 'TRADITIONAL,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO'");
         
         console.log('✅ Database connected successfully');
@@ -34,5 +34,6 @@ const testConnection = async () => {
         process.exit(1);
     }
 };
+
 
 module.exports = { pool, testConnection };

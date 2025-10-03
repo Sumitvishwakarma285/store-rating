@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 const cors = require('cors');
 const { testConnection } = require('./config/database');
 
@@ -55,15 +56,17 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Serve React build files in production
-if (process.env.NODE_ENV === 'production') {
-  // Serve static files from React build
-  app.use(express.static(path.join(__dirname, '../client/build')));
-
-  // Handle client-side routing
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
+if (process.env.NODE_ENV === 'production' && process.env.SERVE_STATIC === 'true') {
+  const buildPath = path.join(__dirname, '../client/build');
+  
+  // Only serve static files if build directory exists
+  if (fs.existsSync(buildPath)) {
+    app.use(express.static(buildPath));
+    
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(buildPath, 'index.html'));
+    });
+  }
 }
 
 // Global error handler
