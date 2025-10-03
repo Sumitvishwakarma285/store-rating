@@ -1,15 +1,7 @@
-// Safe dotenv loading for production
-if (process.env.NODE_ENV !== 'production') {
-  try {
-      require('dotenv').config();
-  } catch (error) {
-      console.log('dotenv not available, using environment variables');
-  }
-}
-
+require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
-const helmet = require('helmet');
 const { testConnection } = require('./config/database');
 
 // Import routes
@@ -21,35 +13,30 @@ const ratingRoutes = require('./routes/ratings');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Security middleware
-app.use(helmet({
-  crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: "cross-origin" }
-}));
-
-// CORS configuration
+// ✅ CORS configuration
 const allowedOrigins = [
   'http://localhost:3000',
-  process.env.FRONTEND_URL,
-  'https://store-rating-frontend.onrender.com'
-].filter(Boolean);
+  'http://127.0.0.1:3000',
+  process.env.FRONTEND_URL // e.g. https://your-app-name.onrender.com
+];
 
-app.use(cors({
+const corsOptions = {
   origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      
-      if (allowedOrigins.indexOf(origin) !== -1) {
-          callback(null, true);
-      } else {
-          callback(new Error('Not allowed by CORS'));
-      }
+    // allow requests with no origin (like Postman / curl)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
-}));
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-// Body parsing middleware
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -59,33 +46,32 @@ app.use('/api/users', userRoutes);
 app.use('/api/stores', storeRoutes);
 app.use('/api/ratings', ratingRoutes);
 
-// Health check endpoint
+// Health check
 app.get('/api/health', (req, res) => {
-  res.json({ 
-      status: 'OK',
-      service: 'Store Rating API',
-      environment: process.env.NODE_ENV || 'development',
-      timestamp: new Date().toISOString(),
-      version: '1.0.0'
+  res.json({
+    status: 'OK',
+    environment: process.env.NODE_ENV || 'development',
+    timestamp: new Date().toISOString()
   });
 });
 
-// Root endpoint
-app.get('/', (req, res) => {
-  res.json({
-      message: 'Store Rating Platform API',
-      version: '1.0.0',
-      status: 'Running successfully'
+// Serve React build files in production
+if (process.env.NODE_ENV === 'production') {
+  // Serve static files from React build
+  app.use(express.static(path.join(__dirname, '../client/build')));
+
+  // Handle client-side routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
-});
+}
 
 // Global error handler
 app.use((error, req, res, next) => {
   console.error('Global error:', error);
-  
   res.status(error.status || 500).json({
-      message: error.message || 'Internal server error',
-      ...(process.env.NODE_ENV === 'development' && { stack: error.stack })
+    message: error.message || 'Internal server error',
+    ...(process.env.NODE_ENV === 'development' && { stack: error.stack })
   });
 });
 
@@ -96,18 +82,18 @@ app.use('/api/*', (req, res) => {
 
 const startServer = async () => {
   try {
-      // Test database connection
-      await testConnection();
-      
-      app.listen(PORT, '0.0.0.0', () => {
-          console.log(`🚀 Store Rating API server running on port ${PORT}`);
-          console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
-          console.log(`📊 Database: ${process.env.DB_NAME}`);
-          console.log(`🔗 Health check: http://localhost:${PORT}/api/health`);
-      });
+    // Test database connection
+    await testConnection();
+
+    app.listen(PORT, '0.0.0.0', () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+      console.log(`📊 Database: ${process.env.DB_NAME}`);
+      console.log(`✅ Allowed Origins:`, allowedOrigins);
+    });
   } catch (error) {
-      console.error('Failed to start server:', error);
-      process.exit(1);
+    console.error('Failed to start server:', error);
+    process.exit(1);
   }
 };
 

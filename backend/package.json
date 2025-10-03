@@ -1,15 +1,13 @@
 {
   "name": "store-rating-backend",
   "version": "1.0.0",
-  "description": "Store Rating Platform API",
+  "description": "Store Rating Platform Backend API",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+   "start": "node server.js",
     "dev": "nodemon server.js",
-    "init-db": "node models/initDatabase.js"
-  },
-  "engines": {
-    "node": "18.x"
+    "init-db": "node models/initDatabase.js",
+    "test-db": "node -e \"require('./config/database').testConnection()\""
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
