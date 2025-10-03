@@ -1,331 +1,138 @@
-Store Rating Platform
-<p align="center"> <strong>A comprehensive MERN stack application for rating and managing stores</strong> </p> <p align="center"> <img src="https://img.shields.io/badge/React-18.2.0-blue?style=flat-square&logo=react" /> <img src="https://img.shields.io/badge/Node.js-18.x-green?style=flat-square&logo=node.js" /> <img src="https://img.shields.io/badge/Express-4.18.2-lightgrey?style=flat-square&logo=express" /> <img src="https://img.shields.io/badge/MySQL-8.0-orange?style=flat-square&logo=mysql" /> <img src="https://img.shields.io/badge/Deployed-Render-success?style=flat-square&logo=render" /> </p>
-📋 Table of Contents
-Overview
+# Store Rating Platform  
 
-Features
+<p align="center">  
+  <strong>A comprehensive MERN stack application for rating and managing stores</strong>  
+</p>  
 
-Tech Stack
+<p align="center">  
+  <img src="https://img.shields.io/badge/React-18.2.0-blue?style=flat-square&logo=react" />  
+  <img src="https://img.shields.io/badge/Node.js-18.x-green?style=flat-square&logo=node.js" />  
+  <img src="https://img.shields.io/badge/Express-4.18.2-lightgrey?style=flat-square&logo=express" />  
+  <img src="https://img.shields.io/badge/MySQL-8.0-orange?style=flat-square&logo=mysql" />  
+  <img src="https://img.shields.io/badge/Deployed-Render-success?style=flat-square&logo=render" />  
+</p>  
 
-Project Structure
+---
 
-Installation & Setup
+## 📋 Table of Contents  
 
-Environment Variables
+- [Overview](#-overview)  
+- [Features](#-features)  
+- [Tech Stack](#-tech-stack)  
+- [Project Structure](#-project-structure)  
+- [Installation & Setup](#-installation--setup)  
+- [Environment Variables](#-environment-variables)  
+- [API Endpoints](#-api-endpoints)  
+- [Deployment](#-deployment)  
+- [User Roles & Permissions](#-user-roles--permissions)  
+- [Screenshots](#-screenshots)  
+- [Contributing](#-contributing)  
+- [License](#-license)  
 
-API Endpoints
+---
 
-Deployment
+## 🎯 Overview  
 
-User Roles & Permissions
+The **Store Rating Platform** is a full-stack web application built with the **MERN stack** that allows users to discover, rate, and review stores.  
 
-Screenshots
+The platform implements **role-based authentication** with three distinct user types:  
+- Normal Users  
+- Store Owners  
+- Administrators  
 
-Contributing
+**Live Demo**: [Store Rating Platform](#)  
+**API Docs**: [Backend API](#)  
 
-License
+---
 
-🎯 Overview
-The Store Rating Platform is a full-stack web application built with the MERN stack that allows users to discover, rate, and review stores. The platform implements a role-based authentication system with three distinct user types: normal users, store owners, and administrators.
+## ✨ Features  
 
-Live Demo: Store Rating Platform
-API Docs: Backend API
+### 🔐 Authentication & Authorization  
+- Unified login system (all roles)  
+- Role-based access control  
+- JWT authentication & protected routes  
+- Self-registration (for normal users only)  
 
-✨ Features
-🔐 Authentication & Authorization
-Unified Login System: Single login for all user roles
+### 👥 User Management (Admin Only)  
+- CRUD operations on users  
+- Assign roles (user, store_owner, admin)  
+- Bulk operations + search/filter  
 
-Role-Based Access Control: Different dashboards and permissions per role
+### 🏪 Store Management  
+- **Admins**: Full CRUD on stores  
+- **Store Owners**: Manage owned stores  
+- **Users**: Browse & review stores  
 
-User Registration: Self-registration available for normal users only
+### ⭐ Rating System  
+- 1–5 star ratings  
+- One rating per store (updatable)  
+- Real-time updates  
+- Rating analytics  
 
-JWT Token Authentication: Secure session management
+### 📊 Dashboards  
+- **Admin**: system stats & analytics  
+- **Store Owner**: store performance  
+- **User**: personal ratings history  
 
-Protected Routes: Route-level access control
+### 🎨 UI/UX  
+- Responsive (Tailwind CSS)  
+- Toast notifications  
+- Loading states + error handling  
 
-👥 User Management (Admin Only)
-Create, read, update, and delete users
+---
 
-Assign roles (normal, store_owner, admin)
+## 🛠 Tech Stack  
 
-Search and filter users
+**Frontend**  
+- React 18.2  
+- React Router DOM  
+- Tailwind CSS  
+- Axios  
+- React Hook Form  
+- React Toastify  
+- Heroicons  
 
-Bulk user operations
+**Backend**  
+- Node.js 18.x  
+- Express.js  
+- JWT, Bcrypt  
+- CORS, Helmet  
 
-🏪 Store Management
-For Admins: Full CRUD operations on stores
+**Database**  
+- MySQL 8.0 (Aiven Cloud)  
+- Connection pooling  
+- Foreign key constraints  
 
-For Store Owners: View and manage owned stores
+**Deployment**  
+- Render (Frontend + Backend)  
 
-For Normal Users: Browse and discover stores
+---
 
-Search and filter functionality
+## 📁 Project Structure  
 
-Store details with ratings and reviews
-
-⭐ Rating System
-1-5 Star Rating Scale: Intuitive rating system
-
-One Rating Per Store: Users can rate each store once (updatable)
-
-Real-time Rating Updates: Instant feedback on rating changes
-
-Rating Analytics: Average ratings and total review counts
-
-My Ratings Page: Users can view and manage their ratings
-
-📊 Dashboard Features
-Admin Dashboard: System overview, user statistics, store analytics
-
-Store Owner Dashboard: Owned stores performance, ratings received
-
-User Dashboard: Personal rating history, quick store access
-
-Real-time Statistics: Live updates on platform metrics
-
-🎨 UI/UX Features
-Responsive Design: Mobile-first approach with Tailwind CSS
-
-Interactive Components: Smooth animations and transitions
-
-Toast Notifications: Real-time feedback for user actions
-
-Loading States: Skeleton screens and loading indicators
-
-Error Handling: Comprehensive error pages and validation
-
-🛠 Tech Stack
-Frontend
-React 18.2.0: User interface library
-
-React Router DOM: Client-side routing
-
-Tailwind CSS: Utility-first CSS framework
-
-Axios: HTTP client for API calls
-
-React Hook Form: Form state management
-
-React Toastify: Toast notifications
-
-Heroicons: Beautiful SVG icons
-
-Backend
-Node.js 18.x: JavaScript runtime
-
-Express.js: Web application framework
-
-MySQL 8.0: Relational database
-
-JWT: JSON Web Token authentication
-
-Bcrypt: Password hashing
-
-CORS: Cross-origin resource sharing
-
-Helmet: Security middleware
-
-Database
-MySQL: Primary database (Aiven Cloud)
-
-Connection Pooling: Optimized database connections
-
-Foreign Key Constraints: Data integrity enforcement
-
-Deployment
-Render: Cloud hosting platform
-
-Separate Deployments: Frontend (Static Site) + Backend (Web Service)
-
-Environment Management: Production-ready configuration
-
-📁 Project Structure
-text
+```bash
 store-rating/
 ├── backend/                 # Express.js API server
-│   ├── config/
-│   │   └── database.js     # MySQL connection configuration
-│   ├── controllers/        # Request handlers
-│   │   ├── authController.js
-│   │   ├── userController.js
-│   │   ├── storeController.js
-│   │   └── ratingController.js
-│   ├── middleware/         # Custom middleware
-│   │   ├── auth.js        # JWT authentication
-│   │   └── validation.js  # Request validation
-│   ├── models/            # Database models and initialization
-│   │   └── initDatabase.js
-│   ├── routes/            # API route definitions
-│   │   ├── auth.js
-│   │   ├── users.js
-│   │   ├── stores.js
-│   │   └── ratings.js
-│   ├── .env              # Environment variables
+│   ├── config/              # DB config
+│   ├── controllers/         # Request handlers
+│   ├── middleware/          # JWT + validation
+│   ├── models/              # DB models
+│   ├── routes/              # API routes
+│   ├── .env                 
 │   ├── package.json
-│   └── server.js         # Application entry point
-├── frontend/              # React.js client application
-│   ├── public/           # Static assets
+│   └── server.js
+├── frontend/                # React client
+│   ├── public/
 │   ├── src/
-│   │   ├── components/   # Reusable UI components
-│   │   │   ├── Auth/    # Authentication components
-│   │   │   ├── Dashboard/ # Role-based dashboards
-│   │   │   ├── Store/   # Store management components
-│   │   │   └── common/  # Shared components
-│   │   ├── context/     # React Context providers
-│   │   ├── pages/       # Page-level components
-│   │   ├── utils/       # Helper functions & constants
-│   │   ├── App.jsx      # Main app component
-│   │   └── index.js     # React entry point
-│   ├── .env             # Environment variables
+│   │   ├── components/  
+│   │   ├── context/     
+│   │   ├── pages/       
+│   │   ├── utils/       
+│   │   ├── App.jsx     
+│   │   └── index.js     
+│   ├── .env
 │   ├── package.json
 │   └── tailwind.config.js
 ├── .gitignore
 ├── README.md
-└── package.json          # Root package.json for deployment
-🚀 Installation & Setup
-Prerequisites
-Node.js 18.x or higher
-
-MySQL 8.0+ database
-
-Git
-
-1. Clone Repository
-bash
-git clone https://github.com/yourusername/store-rating-platform.git
-cd store-rating-platform
-2. Backend Setup
-bash
-cd backend
-npm install
-
-# Create .env file (see Environment Variables section)
-cp .env.example .env
-
-# Initialize database
-npm run init-db
-
-# Start development server
-npm run dev
-3. Frontend Setup
-bash
-cd frontend
-npm install
-
-# Create .env file
-cp .env.example .env
-
-# Start development server
-npm start
-4. Access Application
-Frontend: http://localhost:3000
-
-Backend API: http://localhost:5000
-
-API Health Check: http://localhost:5000/api/health
-
-🔧 Environment Variables
-Backend (.env)
-text
-NODE_ENV=development
-PORT=5000
-
-# Database Configuration
-DB_HOST=your_mysql_host
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
-DB_NAME=store_rating_platform
-DB_PORT=3306
-
-# JWT Configuration
-JWT_SECRET=your_super_secret_jwt_key_here
-
-# CORS Configuration
-FRONTEND_URL=http://localhost:3000
-Frontend (.env)
-text
-REACT_APP_API_URL=http://localhost:5000
-REACT_APP_APP_NAME=Store Rating Platform
-📚 API Endpoints
-Authentication
-POST /api/auth/login - User login
-
-POST /api/auth/register - User registration (normal users only)
-
-GET /api/auth/verify - Verify JWT token
-
-Users (Admin Only)
-GET /api/users - Get all users
-
-POST /api/users - Create new user
-
-PUT /api/users/:id - Update user
-
-DELETE /api/users/:id - Delete user
-
-GET /api/users/dashboard-stats - Get dashboard statistics
-
-Stores
-GET /api/stores - Get all stores
-
-POST /api/stores - Create store (admin only)
-
-GET /api/stores/:id - Get store details
-
-PUT /api/stores/:id - Update store (admin only)
-
-DELETE /api/stores/:id - Delete store (admin only)
-
-Ratings
-POST /api/ratings - Submit/update rating
-
-GET /api/ratings/user - Get user's ratings
-
-GET /api/ratings/store/:storeId - Get store ratings
-
-🌐 Deployment
-The application is deployed using Render with separate services:
-
-Production URLs
-Frontend: https://store-rating-frontend.onrender.com
-
-Backend: https://store-rating-backend.onrender.com
-
-Deployment Architecture
-Frontend: Deployed as Static Site on Render
-
-Backend: Deployed as Web Service on Render
-
-Database: MySQL hosted on Aiven Cloud
-
-Deploy Instructions
-Push code to GitHub repository
-
-Create two Render services:
-
-Static Site for frontend (root: frontend/)
-
-Web Service for backend (root: backend/)
-
-Configure environment variables
-
-Deploy both services
-
-For detailed deployment instructions, see the Deployment Guide.
-
-👤 User Roles & Permissions
-🔵 Normal User
-Registration: ✅ Can self-register
-
-Store Access: ✅ Browse and search stores
-
-Rating: ✅ Rate stores (1-5 stars)
-
-Profile: ✅ View and edit profile
-
-Dashboard: ✅ Personal rating history
-
-🟡 Store Owner
-Registration: ❌ Admin-managed only
-
-<p align="center"> <strong>⭐ Star this repo if you found it helpful! ⭐</strong> </p> <p align="center"> Made with ❤️ using the MERN Stack </p>
+└── package.json             # Root
